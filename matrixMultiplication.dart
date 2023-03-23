@@ -39,29 +39,12 @@ void main() {
     }
   }
 
+  List<String> prodCopy = [];
+  for (var element in productMatrix) {
+    prodCopy.add(element.toString());
+  }
+
   print('\nThis is you product');
 
-  /// For loop to section the [productMatrix] into rows.
-  for (int i in Iterable.generate(column1)) {
-    List<dynamic> productCopy = productMatrix.sublist(0);
-    int modeLen = 0;
-
-    // For loop to find the longest input.
-    for (var product in productMatrix) {
-      if (product.toString().length > modeLen) {
-        modeLen = product.toString().length;
-      }
-    }
-    productMatrix.clear();
-
-    // For loop to add whitespace to ensure proper alignment of elements
-    // for proper visualization.
-    for (var productCopy in productCopy) {
-      String whiteSpace = ' ' * (modeLen - productCopy.toString().length);
-      productMatrix.add('${whiteSpace}${productCopy}');
-    }
-
-    // Printing the processed sectioned row.
-    print(productMatrix.sublist((column2 * i), (column2) + (column2 * i)));
-  }
+  rowSectioner(row: row1, column: column2, elements: prodCopy);
 }

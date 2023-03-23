@@ -17,29 +17,8 @@ List matrixElements({
       elements.add('X');
     }
 
-    /// For loop to section the [elements] into rows.
-    for (int i in Iterable.generate(row)) {
-      List<String> elementsCopy = elements.sublist(0);
-      int modeLen = 0;
-
-      // For loop to find the longest input.
-      for (var element in elements) {
-        if (element.length > modeLen) {
-          modeLen = element.length;
-        }
-      }
-      elements.clear();
-
-      // For loop to add whitespace to ensure proper alignment of elements
-      // for proper visualization.
-      for (var element in elementsCopy) {
-        String whiteSpace = ' ' * (modeLen - element.length);
-        elements.add('${whiteSpace}${element}');
-      }
-
-      // Printing the processed sectioned row.
-      print(elements.sublist((column * i), (column) + (column * i)));
-    }
+    // For sectioning the rows.
+    rowSectioner(row: row, column: column, elements: elements);
 
     // if statement for accepting inputs form the user.
     while (inputs.length != (row * column)) {
@@ -66,4 +45,34 @@ List matrixElements({
     output.add(num.parse(element));
   }
   return output;
+}
+
+void rowSectioner({
+  required int row,
+  required int column,
+  required List<String> elements,
+}) {
+  /// For loop to section the [elements] into rows.
+  for (int i in Iterable.generate(row)) {
+    List<String> elementsCopy = elements.sublist(0);
+    int modeLen = 0;
+
+    // For loop to find the longest input.
+    for (var element in elements) {
+      if (element.length > modeLen) {
+        modeLen = element.length;
+      }
+    }
+    elements.clear();
+
+    // For loop to add whitespace to ensure proper alignment of elements
+    // for proper visualization.
+    for (var element in elementsCopy) {
+      String whiteSpace = ' ' * (modeLen - element.length);
+      elements.add('${whiteSpace}${element}');
+    }
+
+    // Printing the processed sectioned row.
+    print(elements.sublist((column * i), (column) + (column * i)));
+  }
 }
